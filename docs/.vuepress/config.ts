@@ -164,15 +164,15 @@ export default defineUserConfig({
      * @see https://theme-plume.vuejs.press/guide/features/comments/
      */
     comment: {
-      provider: 'Giscus',
+      provider: 'Giscus', // "Artalk" | "Giscus" | "Twikoo" | "Waline"
       comment: true,
       repo: 'Ziphyrien/Khalil-Land',
       repoId: 'R_kgDOPTeWsQ',
-      category: 'Announcements',
-      categoryId: 'DIC_kwDOPTeWsc4Ctn5r',
+      category: 'comment',
+      categoryId: 'DIC_kwDOPTeWsc4CtodF',
       mapping: 'pathname',
       reactionsEnabled: true,
-      inputPosition: 'bottom',
+      inputPosition: 'top',
     }
 
 
