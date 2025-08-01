@@ -78,5 +78,15 @@ export default defineThemeConfig({
   //   postList: true,    // 启用 博客文章列表过渡动画
   //   appearance: 'fade',  // 启用 深色模式切换过渡动画, 或配置过渡动画类型
   // },
-
+  
+  bulletin:{
+    layout: 'top-right',
+    border: true,
+    enablePage: true,
+    lifetime: 'session',
+    id: '10000',
+    title: 'QQ交流群: 807016399',
+    contentType: 'markdown',
+    contentFile: 'docs/other/Bulletin.md'
+  },
 })
