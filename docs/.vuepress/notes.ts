@@ -28,7 +28,7 @@ const readme = defineNoteConfig({
   // 所以请确保  markdown 文件的 permalink 都以 `link` 开头
   link: '/readme',
   // 手动配置侧边栏结构
-  sidebar: ['servername', 'join', 'rules']
+  sidebar: ['servername', 'join', 'rules', 'bugs']
   // 根据文件结构自动生成侧边栏
   // sidebar: 'auto',
 })

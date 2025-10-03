@@ -5,7 +5,7 @@ config:
   # 使用 banner 类型替代 hero，提供更丰富的视觉效果
   - type: banner
     # 您可以替换为您服务器的截图或喜欢的背景图
-    banner: https://dailybing.com/api/v1
+    banner: Background.png
     # 背景遮罩，让文字更清晰
     bannerMask:
       light: 0.2

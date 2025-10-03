@@ -1,18 +1,1 @@
-name: 'IndexNow'
-on:
-  schedule:
-    # Set the schedule time
-    - cron: '0 2 * * *'
-  # 手动触发部署
-  workflow_dispatch:
-  
-jobs:
-  check-and-submit:
-    runs-on: ubuntu-latest
-    steps:
-      - name: indexnow-action
-        uses: bojieyang/indexnow-action@v2
-        with:
-          failure-strategy: error
-          sitemap-location: 'https://wiki.zipawa.top/sitemap.xml'
-          key: ${{ secrets.INDEXNOW_KEY }}
+
