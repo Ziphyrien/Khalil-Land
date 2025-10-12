@@ -1,6 +1,7 @@
 ---
 title: 关于名字
 createTime: 2025/07/30 19:54:11
+date: 2025-07-30
 permalink: /readme/servername/
 icon: material-symbols:info-outline
 ---
@@ -17,3 +18,4 @@ icon: material-symbols:info-outline
 方大同的音乐影响了许多人。为了纪念他独特的才华和他留给世界的宝贵财富，我们将服务器正式更名为 **Khalil Land**。
 
 我们希望，这个名字能让每一位来到这里的玩家，都记住这位杰出的音乐人。当有新人问起时，我们可以一同分享这个名字背后的故事。
+

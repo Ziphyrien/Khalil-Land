@@ -1,6 +1,7 @@
 ---
 title: 游戏规则
 createTime: 2025/08/01 16:47:26
+date: 2025-08-01
 permalink: /readme/rules/
 icon: material-symbols:gavel
 ---

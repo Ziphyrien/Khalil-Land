@@ -1,13 +1,14 @@
 ---
 title: 入服指南
 createTime: 2025/08/06 18:06:56
+date: 2025-08-06
 permalink: /readme/join/
 icon: material-symbols:login
 ---
 
 :::info 核心简介
 `Khalil Land 知己屿` 是一个为《我的世界》（Minecraft）Java版玩家提供的生存模式服务器。我们致力于维护一个稳定、纯粹的游戏环境基石，为所有玩家的探索与创造提供可能性。
-:::  
+:::
 
 :::tip 服务器详情
 
@@ -34,3 +35,4 @@ icon: material-symbols:login
 
 打开QQ客户端，在“找群”界面搜索此群号即可申请加入。
 ::::
+
