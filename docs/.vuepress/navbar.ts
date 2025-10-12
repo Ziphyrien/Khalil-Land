@@ -9,7 +9,7 @@ import { defineNavbarConfig } from 'vuepress-theme-plume'
 export default defineNavbarConfig([
 
   { text: '入服必读', link: '/readme/join/' },
-  { text: '特色玩法', link: '/features/PathFinder/' },
+  { text: '特色玩法', link: '/features/pathfinder/' },
   { text: '友情链接', link: '/friends/' },
 
 ])

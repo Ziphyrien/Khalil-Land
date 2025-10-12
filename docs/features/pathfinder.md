@@ -2,7 +2,6 @@
 title: 导航
 icon: mdi:compass-rose
 permalink: /features/pathfinder/
-date: 2025-10-02T00:00:00.000Z
 createTime: 2025/10/12 16:30:25
 ---
 
@@ -59,8 +58,4 @@ createTime: 2025/10/12 16:30:25
 - ::mdi:water-off:: 在水下的寻路可能会出现一些意料之外的情况，请谨慎使用。
 
 如果您在使用中遇到任何问题，欢迎向服主&管理员反馈！
----
-title: pathfinder
-createTime: 2025/10/12 16:30:25
-permalink: /features/i4h2uikf/
----
+
