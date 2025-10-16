@@ -35,4 +35,3 @@ icon: material-symbols:login
 
 打开QQ客户端，在“找群”界面搜索此群号即可申请加入。
 ::::
-
