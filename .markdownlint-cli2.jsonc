@@ -1,13 +1,137 @@
 {
+  // markdownlint-cli2 配置文件
+  // 参考: https://github.com/DavidAnson/markdownlint-cli2
   "config": {
+    // 默认启用所有规则
+    "default": true,
+
+    // MD001 - 标题层级递增
+    "MD001": true,
+
+    // MD003 - 标题风格：使用 ATX 风格 (##)
+    "MD003": {
+      "style": "atx"
+    },
+
+    // MD004 - 无序列表风格：统一使用 -
+    "MD004": {
+      "style": "dash"
+    },
+
+    // MD007 - 无序列表缩进：2个空格
+    "MD007": {
+      "indent": 2,
+      "start_indented": false
+    },
+
+    // MD009 - 行尾空格：允许2个空格用于换行
+    "MD009": {
+      "br_spaces": 2,
+      "list_item_empty_lines": false,
+      "strict": false
+    },
+
+    // MD010 - 硬标签：不允许使用制表符
+    "MD010": {
+      "code_blocks": true,
+      "spaces_per_tab": 2
+    },
+
+    // MD012 - 多个连续空行：最多1个
+    "MD012": {
+      "maximum": 1
+    },
+
+    // MD013 - 行长度限制：禁用（VuePress 文档中常有长链接、中文内容）
     "MD013": false,
-    "MD033": false
+
+    // MD024 - 重复标题：仅检查同级标题
+    "MD024": {
+      "siblings_only": true
+    },
+
+    // MD025 - 单个 H1 标题：VuePress frontmatter 可能需要多个
+    "MD025": {
+      "front_matter_title": ""
+    },
+
+    // MD029 - 有序列表编号：使用递增数字
+    "MD029": {
+      "style": "ordered"
+    },
+
+    // MD033 - 允许使用 HTML 语法（VuePress 需要使用 Badge、自定义组件等）
+    "MD033": false,
+    "no-inline-html": false,
+
+    // MD034 - 裸链接：允许（某些场景需要）
+    "MD034": false,
+
+    // MD035 - 水平线风格：使用 ---
+    "MD035": {
+      "style": "---"
+    },
+
+    // MD040 - 代码块语言：围栏代码块必须指定语言
+    "MD040": {
+      "allowed_languages": [],
+      "language_only": false
+    },
+
+    // MD041 - 文件首行：VuePress 文档有 frontmatter，允许不是标题
+    "MD041": false,
+
+    // MD046 - 代码块风格：使用围栏式代码块
+    "MD046": {
+      "style": "fenced"
+    },
+
+    // MD049 - 强调样式：使用 *
+    "MD049": {
+      "style": "asterisk"
+    },
+
+    // MD050 - 加粗样式：使用 **
+    "MD050": {
+      "style": "asterisk"
+    },
+
+    // MD051 - 链接片段：检查链接片段是否有效
+    "MD051": true,
+
+    // MD052 - 引用标签：检查引用链接标签
+    "MD052": true,
+
+    // MD053 - 链接定义：检查链接定义
+    "MD053": {
+      "ignored_definitions": []
+    }
   },
+
+  // 要检查的文件
   "globs": [
     "docs/**/*.md",
-    "README.md"
+    "*.md"
   ],
+
+  // 要忽略的文件
   "ignores": [
-    "node_modules"
-  ]
+    "node_modules/**",
+    "**/node_modules/**",
+    "dist/**",
+    "**/dist/**",
+    ".vuepress/**",
+    "**/.vuepress/**"
+  ],
+
+  // 输出格式化器
+  "outputFormatters": [
+    ["markdownlint-cli2-formatter-default"]
+  ],
+
+  // 自动修复
+  "fix": false,
+
+  // 显示找到的文件
+  "showFound": false
 }
