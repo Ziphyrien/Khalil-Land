@@ -36,7 +36,7 @@ const readme = defineCollection({
   // 与页面 permalink 匹配的前缀（必须与页面的 permalink 前缀一致以显示侧边栏）
   linkPrefix: '/readme',
   // 手动配置侧边栏的顺序（文件名或空字符串代表 README）
-  sidebar: ['servername', 'join', 'rules'],
+  sidebar: ['servername', 'join', 'rules', 'bugs'],
 })
 
 const features = defineCollection({
