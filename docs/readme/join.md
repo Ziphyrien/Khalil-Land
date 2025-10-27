@@ -1,7 +1,6 @@
 ---
 title: 入服指南
 createTime: 2025/08/06 18:06:56
-date: 2025-08-06
 permalink: /readme/join/
 icon: material-symbols:login
 ---

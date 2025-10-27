@@ -1,7 +1,6 @@
 ---
 title: 关于名字
 createTime: 2025/07/30 19:54:11
-date: 2025-07-30
 permalink: /readme/servername/
 icon: material-symbols:info-outline
 ---
