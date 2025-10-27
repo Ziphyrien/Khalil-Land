@@ -139,7 +139,6 @@
                   :key="idx"
                   class="item"
                 >
-                  <span class="iconify" data-icon="mdi:cube" data-inline="false"></span>
                   <div class="item-info">
                     <template v-if="item.type === 'Item' && item.decoded_items && item.decoded_items.length > 0">
                       <div v-for="(decodedItem, dIdx) in item.decoded_items" :key="dIdx" class="decoded-item">
@@ -192,7 +191,6 @@
                   :key="idx"
                   class="item"
                 >
-                  <span class="iconify" data-icon="mdi:cube" data-inline="false"></span>
                   <div class="item-info">
                     <template v-if="item.type === 'Item' && item.decoded_items && item.decoded_items.length > 0">
                       <div v-for="(decodedItem, dIdx) in item.decoded_items" :key="dIdx" class="decoded-item">
@@ -780,8 +778,6 @@ onUnmounted(() => {
 /* 表格 */
 .table-container {
   overflow-x: auto;
-  border-radius: 8px;
-  border: 1px solid var(--vp-c-divider);
 }
 
 .data-table {
