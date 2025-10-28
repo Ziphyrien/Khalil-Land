@@ -10,7 +10,7 @@ export default defineNavbarConfig([
 
   { text: '入服必读', link: '/readme/join/' },
   { text: '特色玩法', link: '/features/pathfinder/' },
-  { text: '友情链接', link: '/friends/' },
-  { text: '实时账单', link: '/billing/' }
+  { text: '实时账单', link: '/billing/' },
+  { text: '友情链接', link: '/friends/' }
 
 ])
