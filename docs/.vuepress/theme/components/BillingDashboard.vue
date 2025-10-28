@@ -21,13 +21,27 @@
           商店交易记录
         </h2>
         <div class="controls">
-          <select v-model="shopLogLimit" @change="fetchShopLogs">
-            <option :value="50">最近 50 条</option>
-            <option :value="100">最近 100 条</option>
-            <option :value="200">最近 200 条</option>
-            <option :value="500">最近 500 条</option>
-          </select>
-          <button @click="fetchShopLogs" class="refresh-btn">
+          <div class="custom-select" @click.stop="toggleShopLogDropdown">
+            <div class="select-trigger">
+              <span class="iconify" data-icon="mdi:format-list-numbered" data-inline="false"></span>
+              <span class="select-value">{{ shopLogOptions.find(o => o.value === shopLogLimit)?.label }}</span>
+              <span class="iconify dropdown-arrow" :class="{ open: shopLogDropdownOpen }" data-icon="mdi:chevron-down" data-inline="false"></span>
+            </div>
+            <Transition name="dropdown">
+              <div v-if="shopLogDropdownOpen" class="select-dropdown">
+                <div
+                  v-for="option in shopLogOptions"
+                  :key="option.value"
+                  :class="['select-option', { active: option.value === shopLogLimit }]"
+                  @click="selectShopLogLimit(option.value)"
+                >
+                  <span>{{ option.label }}</span>
+                  <span v-if="option.value === shopLogLimit" class="iconify check-icon" data-icon="mdi:check" data-inline="false"></span>
+                </div>
+              </div>
+            </Transition>
+          </div>
+          <button ref="shopRefreshBtn" @click="handleShopRefresh" class="refresh-btn">
             <span class="iconify" data-icon="mdi:refresh" data-inline="false"></span>
             刷新
           </button>
@@ -91,13 +105,27 @@
           玩家交易记录
         </h2>
         <div class="controls">
-          <select v-model="tradeLimit" @change="fetchTrades">
-            <option :value="20">最近 20 条</option>
-            <option :value="50">最近 50 条</option>
-            <option :value="100">最近 100 条</option>
-            <option :value="200">最近 200 条</option>
-          </select>
-          <button @click="fetchTrades" class="refresh-btn">
+          <div class="custom-select" @click.stop="toggleTradeDropdown">
+            <div class="select-trigger">
+              <span class="iconify" data-icon="mdi:format-list-numbered" data-inline="false"></span>
+              <span class="select-value">{{ tradeOptions.find(o => o.value === tradeLimit)?.label }}</span>
+              <span class="iconify dropdown-arrow" :class="{ open: tradeDropdownOpen }" data-icon="mdi:chevron-down" data-inline="false"></span>
+            </div>
+            <Transition name="dropdown">
+              <div v-if="tradeDropdownOpen" class="select-dropdown">
+                <div
+                  v-for="option in tradeOptions"
+                  :key="option.value"
+                  :class="['select-option', { active: option.value === tradeLimit }]"
+                  @click="selectTradeLimit(option.value)"
+                >
+                  <span>{{ option.label }}</span>
+                  <span v-if="option.value === tradeLimit" class="iconify check-icon" data-icon="mdi:check" data-inline="false"></span>
+                </div>
+              </div>
+            </Transition>
+          </div>
+          <button ref="tradeRefreshBtn" @click="handleTradeRefresh" class="refresh-btn">
             <span class="iconify" data-icon="mdi:refresh" data-inline="false"></span>
             刷新
           </button>
@@ -335,17 +363,35 @@ const tabs = [
 
 const activeTab = ref('shop')
 
+// 刷新按钮 ref
+const shopRefreshBtn = ref(null)
+const tradeRefreshBtn = ref(null)
+
 // 商店日志
 const shopLogs = ref([])
 const shopLoading = ref(false)
 const shopError = ref(null)
 const shopLogLimit = ref(100)
+const shopLogDropdownOpen = ref(false)
+const shopLogOptions = [
+  { value: 50, label: '最近 50 条' },
+  { value: 100, label: '最近 100 条' },
+  { value: 200, label: '最近 200 条' },
+  { value: 500, label: '最近 500 条' }
+]
 
 // 玩家交易
 const trades = ref([])
 const tradeLoading = ref(false)
 const tradeError = ref(null)
 const tradeLimit = ref(50)
+const tradeDropdownOpen = ref(false)
+const tradeOptions = [
+  { value: 20, label: '最近 20 条' },
+  { value: 50, label: '最近 50 条' },
+  { value: 100, label: '最近 100 条' },
+  { value: 200, label: '最近 200 条' }
+]
 
 // WebSocket 实时监控
 const liveLogs = ref([])
@@ -513,6 +559,27 @@ const fetchTrades = async () => {
   }
 }
 
+// 刷新按钮点击处理（带旋转动画）
+const handleShopRefresh = () => {
+  if (shopRefreshBtn.value) {
+    shopRefreshBtn.value.classList.add('spinning')
+    setTimeout(() => {
+      shopRefreshBtn.value?.classList.remove('spinning')
+    }, 800)
+  }
+  fetchShopLogs()
+}
+
+const handleTradeRefresh = () => {
+  if (tradeRefreshBtn.value) {
+    tradeRefreshBtn.value.classList.add('spinning')
+    setTimeout(() => {
+      tradeRefreshBtn.value?.classList.remove('spinning')
+    }, 800)
+  }
+  fetchTrades()
+}
+
 // WebSocket 连接
 const connectWebSocket = () => {
   if (ws.value && ws.value.readyState === WebSocket.OPEN) return
@@ -583,6 +650,40 @@ const clearLiveLogs = () => {
   liveLogs.value = []
 }
 
+// 下拉框选择
+const selectShopLogLimit = (value) => {
+  shopLogLimit.value = value
+  shopLogDropdownOpen.value = false
+  fetchShopLogs()
+}
+
+const selectTradeLimit = (value) => {
+  tradeLimit.value = value
+  tradeDropdownOpen.value = false
+  fetchTrades()
+}
+
+// 切换下拉框
+const toggleShopLogDropdown = () => {
+  shopLogDropdownOpen.value = !shopLogDropdownOpen.value
+  if (shopLogDropdownOpen.value) {
+    tradeDropdownOpen.value = false
+  }
+}
+
+const toggleTradeDropdown = () => {
+  tradeDropdownOpen.value = !tradeDropdownOpen.value
+  if (tradeDropdownOpen.value) {
+    shopLogDropdownOpen.value = false
+  }
+}
+
+// 点击外部关闭下拉框
+const closeDropdowns = () => {
+  shopLogDropdownOpen.value = false
+  tradeDropdownOpen.value = false
+}
+
 // 复制物品数据
 const copyItemData = async (decodedItem) => {
   try {
@@ -641,10 +742,14 @@ onMounted(() => {
     script.src = 'https://code.iconify.design/3/3.1.0/iconify.min.js'
     document.head.appendChild(script)
   }
+
+  // 监听全局点击事件关闭下拉框
+  document.addEventListener('click', closeDropdowns)
 })
 
 onUnmounted(() => {
   disconnectWebSocket()
+  document.removeEventListener('click', closeDropdowns)
 })
 </script>
 
@@ -730,6 +835,137 @@ onUnmounted(() => {
   align-items: center;
 }
 
+/* 自定义下拉选择器 */
+.custom-select {
+  position: relative;
+  user-select: none;
+}
+
+.select-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 140px;
+}
+
+.select-trigger:hover {
+  border-color: var(--vp-c-brand);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.select-trigger:active {
+  transform: scale(0.98);
+}
+
+.select-trigger .iconify:first-child {
+  color: var(--vp-c-text-2);
+  font-size: 1.1rem;
+  transition: all 0.3s;
+}
+
+.select-trigger:hover .iconify:first-child {
+  color: var(--vp-c-brand);
+  transform: scale(1.1);
+}
+
+.select-value {
+  flex: 1;
+  white-space: nowrap;
+}
+
+.dropdown-arrow {
+  color: var(--vp-c-text-2);
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* 下拉菜单 */
+.select-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--vp-c-bg-elv);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  box-shadow: var(--vp-shadow-3);
+  overflow: hidden;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.select-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  color: var(--vp-c-text-1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.select-option:hover {
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-brand);
+}
+
+.select-option.active {
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand);
+  font-weight: 600;
+}
+
+.select-option .check-icon {
+  font-size: 1.1rem;
+  color: var(--vp-c-brand);
+}
+
+/* 下拉动画 */
+.dropdown-enter-active {
+  animation: dropdownIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dropdown-leave-active {
+  animation: dropdownOut 0.2s ease-out;
+}
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dropdownOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+}
+
 .controls select {
   padding: 0.5rem 1rem;
   border: 1px solid var(--vp-c-divider);
@@ -753,23 +989,90 @@ onUnmounted(() => {
   color: var(--vp-c-text-1);
   font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .refresh-btn:hover,
 .clear-btn:hover {
   border-color: var(--vp-c-brand);
   color: var(--vp-c-brand);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 刷新按钮图标旋转动画 */
+.refresh-btn .iconify {
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.refresh-btn:hover .iconify {
+  transform: rotate(180deg) scale(1.1);
+}
+
+/* 点击时的旋转动画 */
+.refresh-btn.spinning .iconify {
+  transform: rotate(540deg) scale(1.1) !important;
+  transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+}
+
+.refresh-btn:active,
+.clear-btn:active,
+.ws-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.ws-toggle-btn {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .ws-toggle-btn.connected {
   border-color: #10b981;
   color: #10b981;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.12) 100%);
+}
+
+.ws-toggle-btn.connected:hover {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.18) 100%);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2), 0 0 0 1px rgba(16, 185, 129, 0.1);
+  transform: translateY(-2px);
 }
 
 .ws-toggle-btn.disconnected {
   border-color: #ef4444;
   color: #ef4444;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.12) 100%);
+}
+
+.ws-toggle-btn.disconnected:hover {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(239, 68, 68, 0.18) 100%);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2), 0 0 0 1px rgba(239, 68, 68, 0.1);
+  transform: translateY(-2px);
+}
+
+/* 连接按钮图标动画 */
+.ws-toggle-btn .iconify {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ws-toggle-btn:hover .iconify {
+  transform: scale(1.15);
+}
+
+/* 状态切换时的弹跳动画 */
+.ws-toggle-btn.connected .iconify,
+.ws-toggle-btn.disconnected .iconify {
+  animation: bounce 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
 }
 
 /* 状态提示 */
