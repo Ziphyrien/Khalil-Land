@@ -260,6 +260,14 @@
       </div> <!-- trades-list -->
     </div> <!-- trade tab -->
 
+    <!-- Toast 提示 -->
+    <Transition name="toast">
+      <div v-if="toastMessage" class="toast" :class="toastType">
+        <span class="iconify" :data-icon="toastType === 'success' ? 'mdi:check-circle' : 'mdi:alert-circle'" data-inline="false"></span>
+        {{ toastMessage }}
+      </div>
+    </Transition>
+
     <!-- 实时监控 -->
     <div v-show="activeTab === 'live'" class="tab-content">
       <div class="content-header">
@@ -398,6 +406,11 @@ const liveLogs = ref([])
 const ws = ref(null)
 const wsConnected = ref(false)
 const wsError = ref(null)
+
+// Toast 提示
+const toastMessage = ref('')
+const toastType = ref('success')
+let toastTimer = null
 
 // 格式化时间
 const formatTime = (timestamp) => {
@@ -684,6 +697,22 @@ const closeDropdowns = () => {
   tradeDropdownOpen.value = false
 }
 
+// 显示 Toast 提示
+const showToast = (message, type = 'success') => {
+  toastMessage.value = message
+  toastType.value = type
+
+  // 清除之前的定时器
+  if (toastTimer) {
+    clearTimeout(toastTimer)
+  }
+
+  // 2秒后自动隐藏
+  toastTimer = setTimeout(() => {
+    toastMessage.value = ''
+  }, 2000)
+}
+
 // 复制物品数据
 const copyItemData = async (decodedItem) => {
   try {
@@ -723,11 +752,11 @@ const copyItemData = async (decodedItem) => {
     // 复制到剪贴板
     await navigator.clipboard.writeText(text)
 
-    // 显示提示（简单实现）
-    alert('已复制物品数据到剪贴板！')
+    // 显示成功提示
+    showToast('已复制到剪贴板', 'success')
   } catch (error) {
     console.error('复制失败:', error)
-    alert('复制失败，请重试')
+    showToast('复制失败，请重试', 'error')
   }
 }
 
@@ -1351,6 +1380,52 @@ onUnmounted(() => {
   .content-header { flex-direction: column; align-items: flex-start; }
   .controls { width: 100%; flex-wrap: wrap; }
   .controls select, .controls button { flex: 1; }
+}
+
+/* Toast 提示 */
+.toast {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--vp-c-divider);
+  z-index: 9999;
+  font-size: 0.875rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.toast.success .iconify {
+  color: var(--vp-c-brand);
+  font-size: 1.1rem;
+}
+
+.toast.error .iconify {
+  color: var(--vp-c-danger);
+  font-size: 1.1rem;
+}
+
+.toast-enter-active,
+.toast-leave-active {
+  transition: all 0.3s ease;
+}
+
+.toast-enter-from {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-1rem);
+}
+
+.toast-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-1rem);
 }
 
 /* ============================= */
