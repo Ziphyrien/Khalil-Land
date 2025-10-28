@@ -319,8 +319,12 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
+// 根据当前协议自动选择 WS 协议
+const isHttps = typeof window !== 'undefined' && window.location.protocol === 'https:'
+const wsProtocol = isHttps ? 'wss:' : 'ws:'
+
 const API_BASE = 'https://bill.zipawa.top'
-const WS_URL = 'wss://bill.zipawa.top/ws/shop-log'
+const WS_URL = `${wsProtocol}//bill.zipawa.top/ws/shop-log`
 
 // 标签页配置
 const tabs = [
@@ -513,7 +517,16 @@ const fetchTrades = async () => {
 const connectWebSocket = () => {
   if (ws.value && ws.value.readyState === WebSocket.OPEN) return
 
+  // 清理旧连接
+  if (ws.value) {
+    ws.value.close()
+    ws.value = null
+  }
+
+  // 清空旧数据
+  liveLogs.value = []
   wsError.value = null
+
   ws.value = new WebSocket(WS_URL)
 
   ws.value.onopen = () => {
@@ -553,6 +566,7 @@ const disconnectWebSocket = () => {
     ws.value = null
   }
   wsConnected.value = false
+  liveLogs.value = []
 }
 
 // 切换 WebSocket 连接
