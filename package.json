@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@vuepress/bundler-vite": "2.0.0-rc.26",
-    "@vuepress/plugin-google-analytics": "2.0.0-rc.114",
+    "@vuepress/plugin-google-analytics": "2.0.0-rc.118",
     "http-server": "^14.1.1",
     "markdownlint-cli2": "^0.18.1",
     "typescript": "^5.9.3",
