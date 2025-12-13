@@ -33,6 +33,41 @@ export default defineUserConfig({
           y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
       })(window, document, "clarity", "script", "sy1dl8ug1u");
     `],
+    // Cookie Consent
+    ['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css' }],
+    ['script', { src: 'https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js', defer: true }],
+    ['script', {}, `
+      window.addEventListener('load', function(){
+        window.cookieconsent.initialise({
+          "palette": {
+            "popup": { "background": "#000" },
+            "button": { "background": "#f1d600" }
+          },
+          "theme": "classic",
+          "type": "opt-in",
+          "content": {
+            "message": "本网站使用 Cookies 来确保您获得最佳体验。",
+            "dismiss": "知道了",
+            "allow": "同意",
+            "deny": "拒绝",
+            "link": "了解更多",
+            "href": "https://www.cookiesandyou.com/"
+          },
+          onInitialise: function (status) {
+            if (status === 'allow' && window.clarity) {
+              window.clarity('consent');
+            }
+          },
+          onStatusChange: function(status, chosenBefore) {
+            if (status === 'allow' && window.clarity) {
+              window.clarity('consent');
+            }
+            // 刷新页面以确保更改生效（特别是撤销同意时停止跟踪）
+            window.location.reload();
+          }
+        })
+      });
+    `],
   ],
 
   bundler: viteBundler(),

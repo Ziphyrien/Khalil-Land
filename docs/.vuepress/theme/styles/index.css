@@ -136,3 +136,64 @@ html {
     font-size: clamp(34px, 12vw, 56px) !important;
   }
     }
+
+/* Cookie Consent Theme Overrides */
+.cc-window {
+  background-color: var(--vp-c-bg-elv) !important;
+  color: var(--vp-c-text-1) !important;
+  font-family: var(--vp-font-family-base) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.cc-btn {
+  background-color: var(--vp-c-brand-1) !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  transition: background-color 0.2s;
+}
+
+.cc-btn:hover {
+  background-color: var(--vp-c-brand-2) !important;
+}
+
+.cc-btn.cc-deny {
+  background-color: transparent !important;
+  color: var(--vp-c-text-2) !important;
+  text-decoration: underline;
+}
+
+.cc-btn.cc-deny:hover {
+  color: var(--vp-c-text-1) !important;
+}
+
+.cc-link {
+  color: var(--vp-c-brand-1) !important;
+  opacity: 0.8;
+}
+
+.cc-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Revoke Button (Cookie Policy) */
+.cc-revoke {
+  padding: 0.5em 1em !important;
+  color: var(--vp-c-brand-1) !important;
+  background-color: var(--vp-c-bg-elv) !important;
+  border: 1px solid var(--vp-c-brand-1) !important;
+  border-radius: 4px !important;
+  font-family: var(--vp-font-family-base) !important;
+  text-decoration: none !important;
+  opacity: 0.8;
+  transition: all 0.2s ease;
+}
+
+.cc-revoke:hover {
+  background-color: var(--vp-c-brand-1) !important;
+  color: #fff !important;
+  opacity: 1;
+  transform: translateY(-2px);
+  text-decoration: none !important;
+}
