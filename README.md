@@ -11,20 +11,20 @@
 3.安装依赖:
 
 ```sh
-npm i
+bun install
 ```
 
 ## 使用
 
 ```sh
 # start dev server
-npm run docs:dev
+bun run docs:dev
 # build for production
-npm run docs:build
+bun run docs:build
 # preview production build in local
-npm run docs:preview
+bun run docs:preview
 # update vuepress and theme
-npm run vp-update
+bun run vp-update
 ```
 
 ## 文档

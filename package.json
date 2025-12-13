@@ -1,5 +1,5 @@
 {
-  "name": "khalil-land-wi-ki",
+  "name": "khalil-land-wiki",
   "type": "module",
   "version": "1.0.0",
   "description": "Minecraft服务器Khalil Land（知己屿）的WiKi，欢迎大家共同编辑！",
@@ -13,7 +13,7 @@
     "docs:dev-clean": "vuepress dev docs --clean-cache --clean-temp",
     "docs:build": "vuepress build docs --clean-cache --clean-temp",
     "docs:preview": "http-server docs/.vuepress/dist",
-    "vp-update": "npx vp-update",
+    "vp-update": "bunx vp-update",
     "lint:md": "markdownlint-cli2",
     "lint:md:fix": "markdownlint-cli2 --fix"
   },
