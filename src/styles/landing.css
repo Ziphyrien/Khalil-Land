@@ -1,0 +1,8 @@
+[data-has-hero] header {
+  border-bottom: 1px solid transparent;
+  background-color: transparent;
+}
+
+[data-has-hero][data-home-search-hidden] header button[data-open-modal] {
+  display: none;
+}

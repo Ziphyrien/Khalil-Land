@@ -1,0 +1,44 @@
+---
+import WikiIcon from './WikiIcon.astro';
+
+const links = [
+  {
+    label: '玩家交流群（QQ）',
+    href: 'https://qm.qq.com/q/h8w9EjixS8',
+    icon: 'ri:qq-fill',
+  },
+  {
+    label: '哔哩哔哩',
+    href: 'https://space.bilibili.com/517481506',
+    icon: 'simple-icons:bilibili',
+  },
+];
+---
+
+{
+  links.map(({ label, href, icon }) => (
+    <a
+      href={href}
+      target="_blank"
+      rel="me noopener noreferrer"
+      class="header-social-link sl-flex"
+    >
+      <span class="sr-only">{label}</span>
+      <WikiIcon name={icon} size="1.1em" />
+    </a>
+  ))
+}
+
+<style>
+  @layer starlight.core {
+    .header-social-link {
+      color: var(--sl-color-text-accent);
+      padding: 0.5em;
+      margin: -0.5em;
+    }
+
+    .header-social-link:hover {
+      color: var(--sl-color-white);
+    }
+  }
+</style>
