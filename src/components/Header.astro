@@ -1,0 +1,26 @@
+---
+import DefaultHeader from '@astrojs/starlight/components/Header.astro';
+---
+
+<DefaultHeader />
+
+<script>
+  const root = document.documentElement;
+
+  if (root.hasAttribute('data-has-hero')) {
+    let animationFrame = 0;
+
+    const updateSearchVisibility = () => {
+      root.toggleAttribute('data-home-search-hidden', window.scrollY > 16);
+      animationFrame = 0;
+    };
+
+    const handleScroll = () => {
+      if (animationFrame) return;
+      animationFrame = window.requestAnimationFrame(updateSearchVisibility);
+    };
+
+    updateSearchVisibility();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+  }
+</script>

@@ -1,0 +1,88 @@
+---
+import WikiIcon from './WikiIcon.astro';
+
+interface Props {
+  title: string;
+  details: string;
+  icon: string;
+  href?: string;
+}
+
+const { title, details, icon, href } = Astro.props;
+const Tag = href ? 'a' : 'article';
+---
+
+<Tag href={href} class:list={['feature-card', { 'feature-card--link': href }]}>
+  <p class="title">
+    <span class="icon"><WikiIcon name={icon} size="1.333em" /></span>
+    <span>{title}</span>
+  </p>
+  <p class="body">{details}</p>
+</Tag>
+
+<style>
+  @layer starlight.components {
+    .feature-card {
+      --sl-card-border: var(--sl-color-purple);
+      --sl-card-bg: var(--sl-color-purple-low);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.5rem, calc(0.125rem + 1vw), 1rem);
+      height: 100%;
+      margin-top: 0 !important;
+      border: 1px solid var(--sl-color-gray-5);
+      border-radius: 0.5rem;
+      background-color: var(--sl-color-black);
+      padding: clamp(1rem, calc(0.125rem + 3vw), 2.5rem);
+      text-decoration: none;
+    }
+    .feature-card:nth-child(4n + 1) {
+      --sl-card-border: var(--sl-color-orange);
+      --sl-card-bg: var(--sl-color-orange-low);
+    }
+    .feature-card:nth-child(4n + 3) {
+      --sl-card-border: var(--sl-color-green);
+      --sl-card-bg: var(--sl-color-green-low);
+    }
+    .feature-card:nth-child(4n + 4) {
+      --sl-card-border: var(--sl-color-red);
+      --sl-card-bg: var(--sl-color-red-low);
+    }
+    .feature-card:nth-child(4n + 5) {
+      --sl-card-border: var(--sl-color-blue);
+      --sl-card-bg: var(--sl-color-blue-low);
+    }
+    .feature-card--link {
+      transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease;
+    }
+    .feature-card--link:hover {
+      background: var(--sl-color-gray-7, var(--sl-color-gray-6));
+      border-color: var(--sl-color-gray-2);
+    }
+    .feature-card .title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0;
+      font-weight: 600;
+      font-size: var(--sl-text-h4);
+      color: var(--sl-color-white);
+      line-height: var(--sl-line-height-headings);
+    }
+    .feature-card .icon {
+      display: inline-flex;
+      flex-shrink: 0;
+      border: 1px solid var(--sl-card-border);
+      border-radius: 0.25rem;
+      background-color: var(--sl-card-bg);
+      padding: 0.2em;
+    }
+    .feature-card .body {
+      margin: 0;
+      font-size: clamp(var(--sl-text-sm), calc(0.5rem + 1vw), var(--sl-text-body));
+      color: var(--sl-color-gray-2);
+    }
+  }
+</style>

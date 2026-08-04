@@ -1,0 +1,141 @@
+@layer base, starlight, theme, components, utilities;
+
+@import "@astrojs/starlight-tailwind";
+@import "@fontsource/cascadia-code";
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme {
+  --font-sans: system-ui, sans-serif;
+  --font-mono: "Cascadia Code", ui-monospace, monospace;
+
+  --color-accent-50: var(--color-emerald-50);
+  --color-accent-100: var(--color-emerald-100);
+  --color-accent-200: var(--color-emerald-200);
+  --color-accent-300: var(--color-emerald-300);
+  --color-accent-400: var(--color-emerald-400);
+  --color-accent-500: var(--color-emerald-500);
+  --color-accent-600: var(--color-emerald-600);
+  --color-accent-700: var(--color-emerald-700);
+  --color-accent-800: var(--color-emerald-800);
+  --color-accent-900: var(--color-emerald-900);
+  --color-accent-950: var(--color-emerald-950);
+
+  --color-gray-50: var(--color-zinc-50);
+  --color-gray-100: var(--color-zinc-100);
+  --color-gray-200: var(--color-zinc-200);
+  --color-gray-300: var(--color-zinc-300);
+  --color-gray-400: var(--color-zinc-400);
+  --color-gray-500: var(--color-zinc-500);
+  --color-gray-600: var(--color-zinc-600);
+  --color-gray-700: var(--color-zinc-700);
+  --color-gray-800: var(--color-zinc-800);
+  --color-gray-900: var(--color-zinc-900);
+  --color-gray-950: var(--color-zinc-950);
+}
+
+:root {
+  --sl-font: var(--font-sans);
+  --sl-font-mono: var(--font-mono);
+  font-optical-sizing: auto;
+}
+
+:root:not([data-has-hero]) {
+  --sl-color-bg-nav: #1f2a1c;
+}
+
+:root[data-theme="light"]:not([data-has-hero]) {
+  --sl-color-bg-nav: #f4f7f3;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 18px;
+  font-weight: 450;
+  font-feature-settings:
+    "liga" 1,
+    "dlig" 1;
+  text-rendering: optimizeLegibility;
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-mono);
+  font-variant-ligatures: normal;
+}
+
+.wiki-icon {
+  display: inline-block;
+  width: var(--wiki-icon-width, 1em);
+  height: var(--wiki-icon-height, 1em);
+  flex: 0 0 auto;
+  vertical-align: -0.125em;
+  background-color: currentcolor;
+  -webkit-mask: var(--wiki-icon) no-repeat center / 100% 100%;
+  mask: var(--wiki-icon) no-repeat center / 100% 100%;
+}
+
+#starlight__sidebar a[data-icon] {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+#starlight__sidebar a[data-icon]::before {
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  flex: 0 0 auto;
+  content: "";
+  background-color: currentcolor;
+  -webkit-mask: var(--wiki-icon) no-repeat center / 100% 100%;
+  mask: var(--wiki-icon) no-repeat center / 100% 100%;
+}
+
+.hero h1 {
+  overflow-wrap: normal;
+  word-break: keep-all;
+  text-wrap: balance;
+}
+
+.sl-markdown-content img:not(.not-content) {
+  border-radius: 0.75rem;
+}
+
+.giscus-panel {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--sl-color-gray-5);
+}
+
+.site-footer {
+  margin-top: 2.5rem;
+  padding: 1.5rem 0 0.5rem;
+  border-top: 1px solid var(--sl-color-gray-5);
+  color: var(--sl-color-gray-3);
+  font-size: var(--sl-text-xs);
+  line-height: 1.7;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0.2rem 0;
+}
+
+.site-footer a {
+  color: var(--sl-color-text-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@media (max-width: 50rem) {
+  html {
+    font-size: 17px;
+  }
+}

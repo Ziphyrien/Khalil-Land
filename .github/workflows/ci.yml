@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: voidzero-dev/setup-vp@250f29ce396baf5e8f24498e17c0dfdebabc26eb # v1
+        with:
+          cache: true
+          run-install: false
+
+      - run: vp install --frozen-lockfile
+      - run: vp run ready
+
+      - name: Format and commit Markdown prose
+        if: >-
+          github.event_name == 'push' ||
+          (github.event_name == 'pull_request' &&
+          github.event.pull_request.head.repo.full_name == github.repository &&
+          github.actor != 'dependabot[bot]')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch --no-tags origin "${TARGET_BRANCH}"
+          git switch -C "${TARGET_BRANCH}" FETCH_HEAD
+
+          vp run format
+          vp run prose:check
+          vp run ready
+
+          git add -- README.md src/content/docs
+          if git diff --cached --quiet; then
+            echo "No prose formatting changes."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "docs: 自动格式化文案"
+          git push origin "HEAD:${TARGET_BRANCH}"

@@ -1,0 +1,29 @@
+---
+import { iconStyle } from '../lib/iconify-icons.ts';
+
+interface Props {
+  name: string;
+  size?: string | number;
+  color?: string;
+  label?: string;
+  class?: string;
+}
+
+const {
+  name,
+  size = '1em',
+  color,
+  label,
+  class: className,
+} = Astro.props;
+const style = iconStyle(name, { size, color });
+---
+
+<span
+  class:list={['wiki-icon', className]}
+  data-icon={name}
+  style={style}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+></span>
