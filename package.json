@@ -17,7 +17,7 @@
     "prepare": "vp config"
   },
   "dependencies": {
-    "@astrojs/markdown-remark": "7.2.2",
+    "@astrojs/markdown-remark": "7.2.3",
     "@astrojs/starlight": "^0.41.7",
     "@astrojs/starlight-tailwind": "^5.0.0",
     "@fontsource/cascadia-code": "5.3.0",
