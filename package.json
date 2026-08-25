@@ -31,7 +31,7 @@
     "remark-cjk-friendly": "2.3.1",
     "remark-cjk-friendly-gfm-strikethrough": "2.3.1",
     "sharp": "^0.35.3",
-    "starlight-giscus": "1.1.0",
+    "starlight-giscus": "1.2.0",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
