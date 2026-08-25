@@ -19,7 +19,7 @@
         "remark-cjk-friendly": "2.3.1",
         "remark-cjk-friendly-gfm-strikethrough": "2.3.1",
         "sharp": "^0.35.3",
-        "starlight-giscus": "1.1.0",
+        "starlight-giscus": "1.2.0",
         "tailwindcss": "^4.3.3",
       },
       "devDependencies": {
@@ -1426,7 +1426,7 @@
 
     "stackback": ["stackback@0.0.2", "", {}, "sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw=="],
 
-    "starlight-giscus": ["starlight-giscus@1.1.0", "", { "peerDependencies": { "@astrojs/starlight": ">=0.41.0" } }, "sha512-slYn66+NkL69WM8ifTav3uboqwWjREP0Z7ALEWMmS6dRkLZqrQNmOS/s429SJmgCUCWaOB3/CEmXCl3UbI9eEQ=="],
+    "starlight-giscus": ["starlight-giscus@1.2.0", "", { "peerDependencies": { "@astrojs/starlight": ">=0.41.0" } }, "sha512-OdT93Hv2UBtvbSVHN23Wfvor3HiAdXnG6wRRrGvPzA8m1dUp95TRognb39bx9/a8MTWSb4zXAVd2LvRvhhnagg=="],
 
     "std-env": ["std-env@4.2.0", "", {}, "sha512-oCUKSupKTHX53EyjDtuZQ64pjLJ6yYCtpmEw0goYxtjG9KpbRe8KAsl2tBUGU9DyMcJ0RwJ8GqJAFzMXcXW1Rw=="],
 
