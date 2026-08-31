@@ -9,7 +9,7 @@
         "@astrojs/starlight": "^0.41.9",
         "@astrojs/starlight-tailwind": "^5.0.0",
         "@fontsource/cascadia-code": "5.3.0",
-        "@iconify-json/material-symbols": "^1.2.89",
+        "@iconify-json/material-symbols": "^1.2.90",
         "@iconify-json/mdi": "^1.2.3",
         "@iconify-json/ri": "^1.2.10",
         "@iconify-json/simple-icons": "^1.2.93",
@@ -234,7 +234,7 @@
 
     "@fontsource/cascadia-code": ["@fontsource/cascadia-code@5.3.0", "", {}, "sha512-XEGnkay3kCOAJXcrZqokezGlw1sATtpqOMOrBOuvYt6Bj6EaejU2BvO1q8AdWdNfDQ4AoYP/Zs30QRY5m9UEZw=="],
 
-    "@iconify-json/material-symbols": ["@iconify-json/material-symbols@1.2.89", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-wYJjKAOptNhc8Bq65PPJVEz/4Ozm+b3ZWEB3H65yGw37dr9AvXibW0GkEdVD7qrCtbD6aC6fY7SLmQCuUGtEAQ=="],
+    "@iconify-json/material-symbols": ["@iconify-json/material-symbols@1.2.90", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-gCOGFOIhK4QFsmUBsxtp6q7EPghSP11txPFfvb5Dj4nDYZ9qO88xpTQGtIzEQJ4mTPdXfzE9OWR2G4KUif4nXg=="],
 
     "@iconify-json/mdi": ["@iconify-json/mdi@1.2.3", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg=="],
 
