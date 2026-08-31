@@ -21,7 +21,7 @@
     "@astrojs/starlight": "^0.41.9",
     "@astrojs/starlight-tailwind": "^5.0.0",
     "@fontsource/cascadia-code": "5.3.0",
-    "@iconify-json/material-symbols": "^1.2.89",
+    "@iconify-json/material-symbols": "^1.2.90",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/ri": "^1.2.10",
     "@iconify-json/simple-icons": "^1.2.93",
